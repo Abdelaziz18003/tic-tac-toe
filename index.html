@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Tic Tac Too game by Abdelaziz Mokhnache</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        #app {
+            max-width: 300px;
+            background: #2196F3;
+            margin: 0px auto;
+            text-align: center;
+            padding: 50px 20px;
+            color: white;
+            font-family: Verdana, Geneva, Tahoma, sans-serif;
+        }
+        
+        #game-box {
+            width: 240px;
+            display: inline-block;
+            margin: 50px auto 0px;
+            padding: 0px;
+        }
+        
+        .mode-panel,
+        .sign-panel {
+            font-size: 0px;
+        }
+        
+        hr {
+            margin: 0px;
+            color: white;
+            height: 0px;
+            border: none;
+            border-bottom: 1px solid white;
+        }
+        
+        label {
+            display: inline-block;
+            width: 50%;
+            height: 40px;
+            line-height: 40px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        
+        label.selected {
+            background: #2089dd;
+        }
+        
+        input[type="radio"],
+        input[type="checkbox"] {
+            display: none;
+        }
+        
+        .grid-item {
+            float: left;
+            width: 33.333%;
+            font-size: 50px;
+            height: 80px;
+            line-height: 80px;
+            border: 1px solid white;
+            margin: 0px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+
+        <div class="control-panel">
+
+            <hr>
+            <div class="mode-panel">
+                <input type="radio" id="human" @click="playVs = 'human'; reset();" checked>
+                <label for="human" :class="{selected: playVs == 'human'}">VS human</label>
+
+                <input type="radio" id="computer" @click="playVs = 'computer'; reset();">
+                <label for="computer" :class="{selected: playVs == 'computer'}">VS computer</label>
+            </div>
+
+            <hr>
+
+            <div class="sign-panel">
+                <input type="radio" name="sign" id="circle" @click="turn = 'O'; reset();" checked>
+                <label for="circle" :class="{selected: turn == 'O'}">O</label>
+
+                <input type="radio" name="sign" id="x-sign" @click="turn = 'X'; reset();">
+                <label for="x-sign" :class="{selected: turn == 'X'}">X</label>
+            </div>
+
+            <hr>
+
+
+        </div>
+
+        <div id="game-box">
+            <div v-for="(sign, index) in matrix" class="grid-item" @click="handleClick(index)">
+                {{ matrix[index] }}
+            </div>
+
+            <!--<div v-if="winner !== ''">
+                {{ winner }}
+            </div>-->
+        </div>
+    </div>
+
+    <script src="js/vue.js"></script>
+    <script src="js/app.js"></script>
+</body>
+
+</html>
